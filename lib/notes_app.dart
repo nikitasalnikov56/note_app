@@ -23,14 +23,10 @@ class MaterialAppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<NoteProvider>();
     return MaterialApp.router(
       locale: context.locale,
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
-      theme: model.isTheme
-          ? ThemeData.dark(useMaterial3: true)
-          : ThemeData.light(useMaterial3: true),
       routerConfig: AppNavigator.router,
       debugShowCheckedModeBanner: false,
     );

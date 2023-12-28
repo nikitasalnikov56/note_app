@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lesson3/domain/provider/note_provider.dart';
@@ -18,9 +17,15 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = context.watch<NoteProvider>();
     return Scaffold(
-      drawer: DrawerItems(model: model),
       appBar: AppBarWidget(
-        leading: const DrawerButton(),
+        leading: IconButton(
+          onPressed: () {
+            model.changeLanguage(context);
+          },
+          icon: const Icon(
+            Icons.language,
+          ),
+        ),
         title: Text(
           LocaleKeys.notes.tr(),
           style: AppStyle.fontStyle,
@@ -49,45 +54,6 @@ class HomePage extends StatelessWidget {
             Icons.edit_outlined,
             color: AppColors.purple,
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class DrawerItems extends StatelessWidget {
-  const DrawerItems({
-    super.key,
-    required this.model,
-  });
-  final NoteProvider model;
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      width: 100,
-      child: SafeArea(
-        child: Column(
-          children: [
-            Switch(
-              activeColor: AppColors.purple,
-              activeTrackColor: AppColors.lightGrey,
-              value: model.isTheme,
-              onChanged: (value) {
-                model.changeTheme(value);
-              },
-            ),
-            const SizedBox(height: 16),
-            IconButton(
-              onPressed: () {
-                model.changeLanguage(context);
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.language,
-                size: 35,
-              ),
-            ),
-          ],
         ),
       ),
     );

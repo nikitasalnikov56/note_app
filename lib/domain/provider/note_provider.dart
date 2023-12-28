@@ -74,13 +74,6 @@ class NoteProvider extends ChangeNotifier {
         HiveBoxes.notes.getAt(index)?.title ?? LocaleKeys.note.tr();
   }
 
-  //изменение темы
-  bool isTheme = false;
-
-  changeTheme(bool value) {
-    isTheme = value;
-    notifyListeners();
-  }
 
   changeLanguage(BuildContext context) {
     if (context.locale == const Locale('ru')) {
